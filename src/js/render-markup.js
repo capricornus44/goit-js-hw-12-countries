@@ -9,7 +9,7 @@ import '@pnotify/core/dist/BrightTheme.css';
 const refs = getRefs();
 
 export default function renderMarkup(countries) {
-  if (!countries.length) {
+  if (countries.status == '404') {
     error({
       text: 'Country with such a name not found',
     });
@@ -30,7 +30,10 @@ export default function renderMarkup(countries) {
 
   if (countries.length === 1) {
     refs.content.innerHTML = countryCardTmpl(...countries);
-    refs.search.value = '';
+    /*
+    Don't clear input if country is found. It's bad for UX
+    refs.search.value = ''; 
+    */
     return;
   }
 }
